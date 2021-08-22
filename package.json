@@ -1,0 +1,45 @@
+{
+  "name": "fools-compass-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Journal and Share your Tarot Readings",
+  "keywords": [
+    "fool's compass",
+    "tarot",
+    "diary",
+    "journal"
+  ],
+  "author": {
+    "name": "thefool@foolscompass.com"
+  },
+  "scripts": {
+    "develop": "next dev -p 4001",
+    "dev": "next dev -p 4001",
+    "build": "next build",
+    "start": "next start -p 4001",
+    "deploy": "next build && next export",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
+  },
+  "engines": {
+    "node": "14.17.4",
+    "npm": "6.14.14",
+    "yarn": "1.22.11"
+  },
+  "dependencies": {
+    "moment": "^2.24.0",
+    "next": "^11.0.0",
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "react-markdown": "^4.2.2",
+    "react-moment": "^0.9.6"
+  },
+  "devDependencies": {
+    "eslint": "^7.30.0",
+    "eslint-config-next": "^11.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.1"
+  },
+  "license": "MIT"
+}
