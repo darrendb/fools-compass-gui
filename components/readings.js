@@ -16,6 +16,13 @@ const Readings = ({ readings }) => {
             )
           })}
         </div>
+          <div>
+              {rightReadings.map((reading, i) => {
+                  return (
+                      <Card reading={reading} key={`reading__left__${reading.slug}`} />
+                  )
+              })}
+          </div>
       </div>
     </div>
   )
