@@ -1,9 +1,12 @@
 import React from "react"
 import Link from "next/link"
 
-const Nav = ({ readings }) => {
+const Nav = ({ readings, other }) => {
   console.log("Nav()")
+  console.log("  readings:")
   console.log(readings)
+  console.log("  other:")
+  console.log(other)
   return (
     <div>
       <nav className="uk-navbar-container" data-uk-navbar>
@@ -18,7 +21,7 @@ const Nav = ({ readings }) => {
         </div>
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav">
-            {readings.map((reading) => {
+            {readings && readings.map((reading) => {
               return (
                 <li key={reading.id}>
                   <Link as={`/reading/${reading.slug}`} href="/reading/[id]">

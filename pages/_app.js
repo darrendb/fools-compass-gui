@@ -10,6 +10,7 @@ export const GlobalContext = createContext({})
 
 const MyApp = ({ Component, pageProps }) => {
   const { global } = pageProps
+    console.log(` - `)
     console.log(`MyApp()`)
     console.log(`  global.favicon: ${global.favicon}`)
   return (
