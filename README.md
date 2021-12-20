@@ -1,5 +1,6 @@
 # FoolsCompass Frontend
-(Built with NextJS)
+(Built with React + Ionic)
+https://github.com/ionic-team/tutorial-photo-gallery-react
 
 Note: gui project depends on svc project for 'build' and 'develop'
 Note: using yarn rather than npm

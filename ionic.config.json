@@ -1,0 +1,7 @@
+{
+  "name": "fools-compass-gui",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
