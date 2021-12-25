@@ -4,14 +4,22 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+// Create a client
+const queryClient = new QueryClient();
 
 defineCustomElements(window);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <QueryClientProvider client={queryClient}>
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        {/*<ReactQueryDevtools />*/}
+    </QueryClientProvider>,
+    document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
