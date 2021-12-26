@@ -1,4 +1,5 @@
 import {
+    IonAvatar,
     IonButton,
     IonButtons,
     IonContent,
@@ -56,7 +57,7 @@ export const useCreateReadingQuery = () => {
                 // title, author, date, comment, image, slug
                 body: JSON.stringify({
                     title: data.title,
-                    author: 51,
+                    author: 50,
                     date: new Date(),
                     comment: data.comment,
                     image: fileInfo[0].id,
@@ -154,7 +155,8 @@ const AddItem: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle> Reading</IonTitle>
+                    <IonAvatar><img src={'/assets/fool_circle_avatar.png'}/></IonAvatar>
+                    <IonTitle style={{color:'#fdfc4f'}}>Add Reading</IonTitle>
                     <IonButtons slot="end">
                         <IonButton onClick={() => history.goBack()} color="danger">Cancel</IonButton>
                     </IonButtons>

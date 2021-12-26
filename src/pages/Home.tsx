@@ -53,7 +53,8 @@ const Home: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Fool's Compass</IonTitle>
+                    <IonAvatar><img src={'/assets/fool_circle_avatar.png'}/></IonAvatar>
+                    <IonTitle style={{color:'#fdfc4f'}}>Fool's Compass</IonTitle>
                     <IonButtons slot="end">
                         <IonButton onClick={() => history.push("/add-item")}>Add</IonButton>
                     </IonButtons>
@@ -68,16 +69,17 @@ const Home: React.FC = () => {
                                 key={p.id}
                             >
                                 <IonLabel>
-                                    <h1 className="ion-text-wrap h1">{p.title}</h1>
-                                    <span className="ion-text-wrap">{moment(p.date).format('MMM Do YYYY')}</span>
-                                    <IonChip>
+                                    <IonChip style={{float: 'right', marginTop: '2px'}}>
                                         <IonAvatar><img src={p.author.image?.url} /></IonAvatar>
                                         <IonLabel>{p.author?.username}</IonLabel>
                                     </IonChip>
-                                    <div>
-                                        <IonImg src={p.image?.url}></IonImg>
-                                    </div>
-                                    <p className="ion-padding ion-text-wrap">{p.comment}</p>
+                                    <p className="ion-text-wrap" style={{color: 'white', lineHeight: 1.2, marginLeft: 0, marginRight: 0, marginTop: '4px',
+                                        marginBottom: '2px', fontSize: '22px', fontWeight: 'normal'}}>{p.title}</p>
+                                    <p className="ion-text-wrap" style={{color: 'grey', lineHeight: 1.2, marginLeft: '10px', marginRight: 0, marginTop: '4px',
+                                        marginBottom: '8px', fontSize: '14px', fontWeight: 'normal'}}>{moment(p.date).format('MMM Do YYYY')}</p>
+                                    <IonImg src={p.image?.url}></IonImg>
+                                    {/*<p className="ion-text-wrap" style={{lineHeight: 1.2, marginLeft: '10px', marginRight: 0, marginTop: '10px',*/}
+                                    {/*    marginBottom: '8px', fontSize: '14px', fontWeight: 'normal'}}>{p.comment}</p>*/}
                                 </IonLabel>
                             </IonItem>
                         );
