@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "fools-compass-gui",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
