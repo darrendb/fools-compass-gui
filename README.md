@@ -31,6 +31,12 @@ $ yarn develop
 ### (Production)
 $ yarn start
 
+## Heroku
+### logs
+heroku logs -n 200 -a fools-compass-gui
+heroku logs --tail -a fools-compass-gui
+heroku addons:open papertrail -a fools-compass-gui
+
 ## Default Dev access uri
 http://localhost:8100/
 
