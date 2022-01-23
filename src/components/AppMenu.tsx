@@ -13,9 +13,9 @@ import {
     IonToolbar,
 } from "@ionic/react";
 import React from "react";
-import { defaultAuth, defaultUser, PageProps } from "./UserTypes";
+import { defaultAuth, defaultUser, PageProps } from "../types/UserTypes";
 import { book, compass, document, logOut, personAdd } from "ionicons/icons";
-import UserProfile from "./UserProfile";
+import UserProfile from "./user/UserProfile";
 
 export interface Props {
 }

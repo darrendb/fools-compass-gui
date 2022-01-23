@@ -13,15 +13,14 @@ import {
     IonToolbar,
 } from "@ionic/react";
 import React, { useRef, useState } from "react";
-import { AuthObjType, UserObjType } from "./UserTypes";
+import { AuthObjType, UserObjType } from "../../types/UserTypes";
 import { useMutation, useQueryClient } from "react-query";
 
 
 export const useCreateReadingService = (_jwt: string = '', _authorId: number = 0) => {
     // console.log("CreateReadingModal.useCreateReadingService()");
     const client = useQueryClient();
-    // temp hardcoded 'the fool' user id (local: 50, dev: 1)
-    const tempUserId: number = 50;
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     return useMutation(
         // title, author, date, comment, image, slug
@@ -29,12 +28,11 @@ export const useCreateReadingService = (_jwt: string = '', _authorId: number = 0
             // console.log("data:");
             // console.log(data);
 
-            const URL = "http://localhost:1937";
 
             // upload file/image
             const formData = new FormData();
             formData.append("files", data.image);
-            const fileResp = await fetch(URL + "/upload", {
+            const fileResp = await fetch(`${BASE_URL}/upload`, {
                 method: "POST",
                 body: formData,
             });
@@ -46,7 +44,7 @@ export const useCreateReadingService = (_jwt: string = '', _authorId: number = 0
             // console.log(fileInfo[0].id);
 
             // post form as new Reading (including file/iimage)
-            const readingPostResp = await fetch(URL + "/readings", {
+            const readingPostResp = await fetch(`${BASE_URL}/readings`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${_jwt}`

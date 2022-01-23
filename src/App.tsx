@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonPage, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Readings from './pages/Readings';
-import { AuthObjType, defaultAuth, defaultUser, UserObjType } from "./components/UserTypes";
+import { AuthObjType, defaultAuth, defaultUser, UserObjType } from "./types/UserTypes";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -27,7 +27,7 @@ import './theme/variables.css';
 /* Global CSS */
 import './global.css';
 import AppMenu from "./components/AppMenu";
-import UserGateway from "./components/UserGateway";
+import UserGateway from "./components/user/UserGateway";
 
 setupIonicReact();
 

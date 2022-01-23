@@ -1,48 +1,7 @@
 import { IonButton, IonInput, IonItem, IonLabel, } from "@ionic/react";
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { PageProps } from "./UserTypes";
-
-export const useAuthenticationService = (callback: Function) => {
-    // console.log("UserLogin.useAuthenticationService() 1");
-    const client = useQueryClient();
-    // temp hardcoded 'the fool' user id (local: 50, dev: 1)
-    // temp hardcoded 'jena' user id (local: 51, dev: 2)
-    const tempUserId: number = 50;
-
-    return useMutation(
-        async (data: { username: string; password: string }) => {
-            // console.log(`UserLogin.useAuthenticationService() 2`);
-
-            const URL = "http://localhost:1937";
-
-            // post auth/local
-            const loginPostResp = await fetch(`${URL}/auth/local`, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                method: "POST",
-                // username, email, password, image
-                body: JSON.stringify({
-                    identifier: data.username,
-                    password: data.password,
-                }),
-            });
-            return await loginPostResp.json();
-        },
-        {
-            onSuccess: (data) => {
-                // console.log('UserLogin.useAuthenticationService.onSuccess() 2');
-                // console.log(`  data.jwt: ${data.jwt}`); // <- this works
-                // console.log(`  data.user: ${data.user}`);// <- this works
-                // console.log('  doing nothing');
-                callback(data);
-
-                // client.invalidateQueries("userAuthQueryKey");
-            },
-        }
-    );
-};
+import { PageProps } from "../../types/UserTypes";
+import { useAuthenticationService } from "../../hooks/useAuthService";
 
 const UserLogin: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj}) => {
     // console.log(`UserLogin()`);
