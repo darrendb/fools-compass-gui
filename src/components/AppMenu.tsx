@@ -16,6 +16,7 @@ import React from "react";
 import { defaultAuth, defaultUser, PageProps } from "../types/UserTypes";
 import { book, compass, document, logOut, personAdd } from "ionicons/icons";
 import UserProfile from "./user/UserProfile";
+import Debugger from "./Debugger";
 
 export interface Props {
 }
@@ -45,6 +46,7 @@ const AppMenu: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj}
                         </IonItem>
                     </IonList>
                 </IonMenuToggle>
+                <Debugger />
             </IonContent>
             <IonFooter >
                 <IonToolbar>

@@ -36,8 +36,6 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
         // console.log('useIonViewDidEnter()');
     });
 
-    const nodeEnv = process.env.NODE_ENV;
-    const baseUrl = process.env.REACT_APP_BASE_URL;
     const userId = userObj?.id;
     const {isLoading, data, error} = useGetReadingsService(authObj?.jwt); // temp stubbing out <- this calls the readings api
     const userReadings = data?.filter(isUserReadings);
@@ -98,7 +96,7 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
                             </IonMenuToggle>
                         </IonButtons>
 
-                        <IonTitle>Fool's Compass - <span style={{color: "gray"}}> ({nodeEnv}, {baseUrl})</span></IonTitle>
+                        <IonTitle>Fool's Compass</IonTitle>
 
                         <IonButtons slot="end">
                             <IonButton onClick={() => setShowModal(true)}>

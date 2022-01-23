@@ -1,13 +1,15 @@
-import { IonContent, IonHeader, IonText, IonTitle, IonToolbar, } from "@ionic/react";
+import { IonButtons, IonContent, IonHeader, IonText, IonTitle, IonToolbar, } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import { PageProps } from "../../types/UserTypes";
 import UserLogin from "./UserLogin";
 import UserSignup from "./UserRegister";
 import GatewayViewToggle from "./GatewayViewToggle";
+import Debugger from "../Debugger";
 
 const UserGateway: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj}) => {
     // console.log(`UserGateway()`);
     const [hasAccount, setHasAccount] = useState(true);
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
 
     useEffect(() => {
         // console.log('UserGateway.useEffect()');
@@ -28,6 +30,7 @@ const UserGateway: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuth
                     <IonText><p>Existing User? Welcome back!</p><p>Please sign in with your username and password.</p>
                     </IonText>
                     <UserLogin userObj={userObj} setUserObj={setUserObj} authObj={authObj} setAuthObj={setAuthObj}/>
+                    <Debugger />
                 </IonContent>
             </>
         );
