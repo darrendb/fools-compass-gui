@@ -9,7 +9,7 @@ import {
     IonLabel,
     IonList,
     IonLoading,
-    IonMenuToggle, IonModal,
+    IonMenuToggle,
     IonPage,
     IonText,
     IonTitle,
@@ -17,49 +17,15 @@ import {
     useIonViewDidEnter
 } from "@ionic/react";
 import React, { useState } from "react";
-import { useHistory } from "react-router";
-import { useQuery, useQueryClient } from "react-query";
 import moment from "moment";
 import { addCircleOutline, menu } from "ionicons/icons";
-import UserProfile from "../components/UserProfile";
-import { PageProps } from "../components/UserTypes";
-import CreateReadingModal from "../components/CreateReadingModal";
-
-export const useGetReadingsService = (_jwt = '') => {
-    // console.log('Readings.useGetReadingsService()');
-    // console.log(`_jwt:`);
-    // console.log(_jwt);
-
-
-    const client = useQueryClient();
-    return useQuery(
-        "readingQueryKey",
-        async () => {
-            // need jwt token before calling service api for user readings
-            const URL = "http://localhost:1937";
-            // get all readings
-            const response = (_jwt) ?
-                await fetch(`${URL}/readings`, {
-                    headers: {
-                        Authorization: `Bearer ${_jwt}`
-                    }
-                }) : await new Response();
-            const readings = await response.json();
-
-            // pre load the cache
-            readings?.forEach((reading: any) => {
-                client.setQueryData(["reading", reading.id], reading);
-            });
-
-            return readings;
-        });
-
-};
-
+import UserProfile from "../components/user/UserProfile";
+import { PageProps } from "../types/UserTypes";
+import CreateReadingModal from "../components/reading/CreateReadingModal";
+import { useGetReadingsService } from "../hooks/useGetReadingsService";
 
 const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj}) => {
-    // console.log(`Home()`);
-    const history = useHistory();
+    // console.log(`Readings()`);
     const [showModal, setShowModal] = useState(false);
 
     const isUserReadings = (reading: any) => {
@@ -68,23 +34,13 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
 
     useIonViewDidEnter(() => {
         // console.log('useIonViewDidEnter()');
-        // console.log(`  authObj.jwt:${authObj?.jwt}`);// <-- this work?
     });
 
-    // console.log(`  authObj.jwt:${authObj?.jwt}`);// <-- this work? nope.
+    const nodeEnv = process.env.NODE_ENV;
+    const baseUrl = process.env.REACT_APP_BASE_URL;
     const userId = userObj?.id;
-    // // const {isLoading, data, error} = useGetReadingsService(token);
     const {isLoading, data, error} = useGetReadingsService(authObj?.jwt); // temp stubbing out <- this calls the readings api
-    // const data:any = []; // temp stub value
-    // const isLoading:boolean = false; // temp stub value
     const userReadings = data?.filter(isUserReadings);
-
-    // const returnValue = data?.returnValue;
-    // console.log(`returnValue:${returnValue}`);
-    // setJwt(returnValue);
-    // console.log(`  isLoading:${isLoading}`);
-    // console.log(`  error:${error}`);
-    // console.log(`userReadings.length:${userReadings?.length}`);
 
     // no readings to display
     if (userReadings?.length < 1) {
@@ -122,7 +78,7 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
                     </IonText>
                     <CreateReadingModal isOpen={showModal} setShowModal={setShowModal}
                                         userObj={userObj} setUserObj={setUserObj}
-                                        authObj={authObj} setAuthObj={setAuthObj} />
+                                        authObj={authObj} setAuthObj={setAuthObj}/>
 
                 </IonContent>
             </IonPage>
@@ -142,7 +98,7 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
                             </IonMenuToggle>
                         </IonButtons>
 
-                        <IonTitle>Fool's Compass</IonTitle>
+                        <IonTitle>Fool's Compass - <span style={{color: "gray"}}> ({nodeEnv}, {baseUrl})</span></IonTitle>
 
                         <IonButtons slot="end">
                             <IonButton onClick={() => setShowModal(true)}>
@@ -195,7 +151,7 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
 
                     <CreateReadingModal isOpen={showModal} setShowModal={setShowModal}
                                         userObj={userObj} setUserObj={setUserObj}
-                                        authObj={authObj} setAuthObj={setAuthObj} />
+                                        authObj={authObj} setAuthObj={setAuthObj}/>
 
                 </IonContent>
             </IonPage>

@@ -1,6 +1,6 @@
 import { IonContent, IonHeader, IonText, IonTitle, IonToolbar, } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-import { PageProps } from "./UserTypes";
+import { PageProps } from "../../types/UserTypes";
 import UserLogin from "./UserLogin";
 import UserSignup from "./UserRegister";
 import GatewayViewToggle from "./GatewayViewToggle";

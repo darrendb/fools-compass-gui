@@ -38,6 +38,7 @@
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
     "@types/yup": "^0.29.13",
+    "dotenv": "^14.2.0",
     "formik": "^2.2.9",
     "ionicons": "^5.4.0",
     "moment": "^2.29.1",
