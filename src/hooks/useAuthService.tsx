@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "react-query";
 
-export const useAuthenticationService = (callback: Function) => {
-    // console.log("UserLogin.useAuthenticationService() 1");
+export const useAuthService = (callback: Function) => {
+    // console.log("useAuthService() 1");
     const BASE_URL = process.env.REACT_APP_BASE_URL;
     const client = useQueryClient();
 
     return useMutation(
         async (data: { username: string; password: string }) => {
-            // console.log(`UserLogin.useAuthenticationService() 2`);
+            // console.log(`useAuthService() 2`);
 
             // post auth/local
             const loginPostResp = await fetch(`${BASE_URL}/auth/local`, {
@@ -15,7 +15,7 @@ export const useAuthenticationService = (callback: Function) => {
                     "Content-Type": "application/json",
                 },
                 method: "POST",
-                // username, email, password, image
+                // username, password
                 body: JSON.stringify({
                     identifier: data.username,
                     password: data.password,
@@ -25,9 +25,15 @@ export const useAuthenticationService = (callback: Function) => {
         },
         {
             onSuccess: (data) => {
-                // console.log('UserLogin.useAuthenticationService.onSuccess() 2');
+                // console.log('useAuthService.onSuccess() 2');
                 callback(data);
             },
-        }
+            onError: (data) => {
+                console.log('useAuthService.onError()');
+                console.log(data);
+                // debugger;
+                // callback(data);
+            },
+        },
     );
 };

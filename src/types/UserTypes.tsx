@@ -1,3 +1,5 @@
+import { number, string } from "yup";
+
 interface UserImage {
     id: number;
     name: string;

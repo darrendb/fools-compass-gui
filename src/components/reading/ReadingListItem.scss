@@ -1,0 +1,47 @@
+
+.readingItem {
+
+  font-family: Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+
+  .readingCell {
+    //border: #2dd36f solid thin;
+    border: none;
+  }
+
+  .readingImage {
+    max-width: 4rem;
+    max-height: 4rem;
+  }
+
+  .readingTitle {
+    color: #fff;
+    font-size: 1.4rem;
+    margin: 4px 0 2px;
+  }
+
+  .readingDate {
+    color: #808080;
+    margin: 4px 0 2px;
+  }
+
+  .readingComment {
+    margin: 4px 0 2px;
+  }
+
+  .readingAuthor {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .editReadingBtnParent {
+    position: relative;
+  }
+
+  .editReadingBtn {
+    position: absolute;
+    right: -6px;
+    top: 0px;
+  }
+}

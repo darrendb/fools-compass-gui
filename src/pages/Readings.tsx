@@ -4,7 +4,6 @@ import {
     IonContent,
     IonHeader,
     IonIcon,
-    IonImg,
     IonItem,
     IonLabel,
     IonList,
@@ -17,19 +16,29 @@ import {
     useIonViewDidEnter
 } from "@ionic/react";
 import React, { useState } from "react";
-import moment from "moment";
-import { addCircleOutline, menu } from "ionicons/icons";
-import UserProfile from "../components/user/UserProfile";
+import { createOutline, menu } from "ionicons/icons";
 import { PageProps } from "../types/UserTypes";
 import CreateReadingModal from "../components/reading/CreateReadingModal";
 import { useGetReadingsService } from "../hooks/useGetReadingsService";
+import ReadingListItem from "../components/reading/ReadingListItem";
+import { defaultReading, ReadingType } from "../types/ReadingTypes";
+import moment, { Moment } from "moment";
+import EditReadingModal from "../components/reading/EditReadingModal";
 
 const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj}) => {
     // console.log(`Readings()`);
-    const [showModal, setShowModal] = useState(false);
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [currentReading, setCurrentReading] = useState(defaultReading);
 
-    const isUserReadings = (reading: any) => {
+    const isUserReadings = (reading: ReadingType) => {
         return reading.author.id === userId;
+    }
+
+    const descReadings = (a: ReadingType, b: ReadingType) => {
+        const aMoment: Moment = moment(a?.date);
+        const bMoment: Moment = moment(b?.date);
+        return bMoment.unix() - aMoment.unix();
     }
 
     useIonViewDidEnter(() => {
@@ -38,7 +47,10 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
 
     const userId = userObj?.id;
     const {isLoading, data, error} = useGetReadingsService(authObj?.jwt); // temp stubbing out <- this calls the readings api
-    const userReadings = data?.filter(isUserReadings);
+    const userReadings = data?.filter(isUserReadings).sort(descReadings);
+    // const sortedReadings = userReadings?.sort(descReadings);
+    // console.log('error:');
+    // console.log(error);
 
     // no readings to display
     if (userReadings?.length < 1) {
@@ -55,8 +67,8 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
                         </IonButtons>
                         <IonTitle>Fool's Compass</IonTitle>
                         <IonButtons slot="end">
-                            <IonButton onClick={() => setShowModal(true)}>
-                                <IonIcon slot="icon-only" icon={addCircleOutline}/>
+                            <IonButton onClick={() => setShowCreateModal(true)}>
+                                <IonIcon slot="icon-only" icon={createOutline}/>
                             </IonButton>
                         </IonButtons>
                     </IonToolbar>
@@ -74,7 +86,7 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
                     <IonText className="ion-padding">
                         <p>Use the '+' button to Add a new Reading</p>
                     </IonText>
-                    <CreateReadingModal isOpen={showModal} setShowModal={setShowModal}
+                    <CreateReadingModal isOpen={showCreateModal} setShowModal={setShowCreateModal}
                                         userObj={userObj} setUserObj={setUserObj}
                                         authObj={authObj} setAuthObj={setAuthObj}/>
 
@@ -99,8 +111,8 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
                         <IonTitle>Fool's Compass</IonTitle>
 
                         <IonButtons slot="end">
-                            <IonButton onClick={() => setShowModal(true)}>
-                                <IonIcon slot="icon-only" icon={addCircleOutline}/>
+                            <IonButton onClick={() => setShowCreateModal(true)}>
+                                <IonIcon slot="icon-only" icon={createOutline}/>
                             </IonButton>
                         </IonButtons>
                     </IonToolbar>
@@ -111,45 +123,23 @@ const Readings: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj
                     <IonList>
                         {userReadings?.map((reading: any) => {
                             return (
-                                <IonItem
-                                    key={reading.id}
-                                >
-                                    <IonLabel>
-                                        <UserProfile userObj={reading.author}/>
-                                        <p className="ion-text-wrap" style={{
-                                            color: 'white',
-                                            lineHeight: 1.2,
-                                            marginLeft: 0,
-                                            marginRight: 0,
-                                            marginTop: '4px',
-                                            marginBottom: '2px',
-                                            fontSize: '22px',
-                                            fontWeight: 'normal'
-                                        }}>{reading.title}</p>
-                                        <p className="ion-text-wrap" style={{
-                                            color: 'grey',
-                                            lineHeight: 1.2,
-                                            marginLeft: '10px',
-                                            marginRight: 0,
-                                            marginTop: '4px',
-                                            marginBottom: '8px',
-                                            fontSize: '14px',
-                                            fontWeight: 'normal'
-                                        }}>{moment(reading.date).format('MMM Do YYYY')}</p>
-                                        <IonImg src={reading.image?.url}></IonImg>
-                                        <p className="ion-text-wrap" style={{
-                                            lineHeight: 1.2, marginLeft: '10px', marginRight: 0, marginTop: '10px',
-                                            marginBottom: '8px', fontSize: '14px', fontWeight: 'normal'
-                                        }}>{reading.comment}</p>
-                                    </IonLabel>
-                                </IonItem>
+                                <ReadingListItem key={reading?.id}
+                                                 reading={reading}
+                                                 setShowEditModal={setShowEditModal}
+                                                 setCurrentReading={setCurrentReading}
+                                />
                             );
                         })}
                     </IonList>
 
-                    <CreateReadingModal isOpen={showModal} setShowModal={setShowModal}
+                    <CreateReadingModal isOpen={showCreateModal} setShowModal={setShowCreateModal}
                                         userObj={userObj} setUserObj={setUserObj}
-                                        authObj={authObj} setAuthObj={setAuthObj}/>
+                                        authObj={authObj} setAuthObj={setAuthObj} />
+
+                    <EditReadingModal isOpen={showEditModal} setShowModal={setShowEditModal}
+                                      userObj={userObj} setUserObj={setUserObj}
+                                      authObj={authObj} setAuthObj={setAuthObj}
+                                      currentReading={currentReading} />
 
                 </IonContent>
             </IonPage>

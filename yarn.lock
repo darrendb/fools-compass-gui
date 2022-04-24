@@ -2821,6 +2821,11 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+autobind-decorator@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/autobind-decorator/-/autobind-decorator-2.4.0.tgz#ea9e1c98708cf3b5b356f7cf9f10f265ff18239c"
+  integrity sha512-OGYhWUO72V6DafbF8PM8rm3EPbfuyMZcJhtm5/n26IDwO18pohE4eNazLoCGhPiXOCD0gEGmrbU3849QvM8bbw==
+
 autoprefixer@^10.4.0:
   version "10.4.0"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.0.tgz#c3577eb32a1079a440ec253e404eaf1eb21388c8"
@@ -3889,6 +3894,11 @@ core-js@^3.19.2:
   version "3.20.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.20.1.tgz#eb1598047b7813572f1dc24b7c6a95528c99eef3"
   integrity sha512-btdpStYFQScnNVQ5slVcr858KP0YWYjV16eGJQw8Gg7CWtu/2qNvIM3qVRIR3n1pK2R9NNOrTevbvAYxajwEjg==
+
+core-js@^3.20.3:
+  version "3.20.3"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.20.3.tgz#c710d0a676e684522f3db4ee84e5e18a9d11d69a"
+  integrity sha512-vVl8j8ph6tRS3B8qir40H7yw7voy17xL0piAjlbBUsH7WIfzoedL/ZOr1OV9FyZQLWXsayOJyV4tnRyXR85/ag==
 
 core-util-is@1.0.2:
   version "1.0.2"
@@ -7288,6 +7298,21 @@ jest@^27.4.3:
     "@jest/core" "^27.4.5"
     import-local "^3.0.2"
     jest-cli "^27.4.5"
+
+jodit-react@^1.1.20:
+  version "1.1.20"
+  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.1.20.tgz#3806d517d2e05649f17f8c1382871ce4cc749401"
+  integrity sha512-iaippXKz2OTS/7IKJZvk73k+DAq+iF64aWDhA8BYyQOLrGoMeVTv51gMIvaIlaGi3ELd49oK77tDklU2TTvySg==
+  dependencies:
+    jodit "^3.9.4"
+
+jodit@^3.13.2, jodit@^3.9.4:
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/jodit/-/jodit-3.13.2.tgz#184d8237d4658955604d394a44f04750d864f9ab"
+  integrity sha512-YFg5mdEw3fRXhU5ieC4M/YKYWQGYZS0KIlPuEhP+wT9eywQbdCrDSdY1V55YVIUC5kR2lyXNjrMdDdkrCEAdwQ==
+  dependencies:
+    autobind-decorator "^2.4.0"
+    core-js "^3.20.3"
 
 js-base64@^2.1.8:
   version "2.6.4"

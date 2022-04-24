@@ -51,4 +51,13 @@ https://ionicframework.com/docs/react/your-first-app/deploying-mobile
    https://stackoverflow.com/questions/61865231/invalid-code-signature-due-to-inadequate-entitlements
 3.
 
+### ios Trust the App/Developer
+On launch of initial build from local Mac XCode, will get this error:
+   "Untrusted Developer"
+   "Your device management settings do not allow using apps from developer 
+   "Apple Development: accounts@darrendb.com (SVT24H4M6D)" on this iPhone. 
+   You can allow using these apps in Settings."
+
+To resolve: on iPhone:
+   Settings > General > Device Management > Developer App > Trust
 

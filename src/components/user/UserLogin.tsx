@@ -1,7 +1,7 @@
 import { IonButton, IonInput, IonItem, IonLabel, } from "@ionic/react";
 import React, { useState } from "react";
 import { PageProps } from "../../types/UserTypes";
-import { useAuthenticationService } from "../../hooks/useAuthService";
+import { useAuthService } from "../../hooks/useAuthService";
 
 const UserLogin: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthObj}) => {
     // console.log(`UserLogin()`);
@@ -10,7 +10,7 @@ const UserLogin: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthOb
     // const [present, dismiss] = useIonToast();
 
     const handleLoginResponse = (data: any | null) => {
-        // console.log('UserLogin.useAuthenticationService.callback() - aka handleLoginResponse() 3');
+        // console.log('UserLogin.useAuthService.callback() - aka handleLoginResponse() 3');
         // console.log(`UserLogin.handleLoginResponse()`);
         // console.log(`  data.jwt: ${data.jwt}`);// <- this works
         // console.log('  setting values here')
@@ -25,14 +25,21 @@ const UserLogin: React.FC<PageProps> = ({userObj, setUserObj, authObj, setAuthOb
         // })
 
     };
-    const {isLoading, error, mutateAsync: newLoginMutation} = useAuthenticationService(handleLoginResponse);
+    const {isLoading, error, mutateAsync: newLoginMutation} = useAuthService(handleLoginResponse);
+    console.log('error:');
+    console.log(error);
 
     const submitForm = async () => {
         // console.log("UserLogin.submitForm() 1");
         // console.log('  doing nothing')
         // username, password
         // console.log(username);
-        const resp = await newLoginMutation({username, password});
+        const resp = await newLoginMutation({username, password})
+            .catch((reason:any) => {
+                console.log('catch()');
+                console.log('  reason:');
+                console.log(reason);
+            });
         // console.log("UserLogin.submitForm() 4");
         // console.log(`  resp.jwt: ${resp.jwt}`);
         // console.log('  doing nothing')

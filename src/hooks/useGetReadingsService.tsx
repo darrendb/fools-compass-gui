@@ -1,7 +1,8 @@
 import { useQuery, useQueryClient } from "react-query";
 
 export const useGetReadingsService = (_jwt = '') => {
-    // console.log('Readings.useGetReadingsService()');
+    // console.log('useGetReadingsService()');
+    // console.log(`_jwt: ${_jwt}`);
 
     const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -20,10 +21,11 @@ export const useGetReadingsService = (_jwt = '') => {
             const readings = await response.json();
 
             // pre load the cache
-            readings?.forEach((reading: any) => {
-                client.setQueryData(["reading", reading.id], reading);
-            });
-
+            if (readings.length > 0) {
+                readings?.forEach((reading: any) => {
+                    client.setQueryData(["reading", reading.id], reading);
+                });
+            }
             return readings;
         });
 
